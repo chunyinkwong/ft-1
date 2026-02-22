@@ -23,5 +23,5 @@ test('Calculator', async () => {
     const button_clear = screen.getByText('C');
     await user.click(button_clear);
     
-    expect(display).toHaveTextContent('');
+    expect(display).toHaveTextContent('‎');
 });

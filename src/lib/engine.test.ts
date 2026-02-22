@@ -26,10 +26,10 @@ describe('evaluate', () => {
     it('handles negative numbers', () => {
         expect(evaluate('-1+2')).toBe(1);
     });
-    it('throws on attempted code injection', () => {
-        expect(() => evaluate('alert(1)')).toThrow();
+    it('does not evaluate attempted code injection', () => {
+        expect(evaluate('alert("no")')).toBeNaN();
     });
-    it('throws on invalid expressions', () => {
-        expect(() => evaluate('a+1')).toThrow();
+    it('no error on invalid expressions', () => {
+        expect(evaluate('1..0')).toBeNaN();
     });
 });

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { evaluate } from "../lib/engine";
-    let expr = "";
+    // Use invisible character to prevent the display from collapsing when empty
+    let expr = "‎";
     let result: number | null = null;
 
     function press(key: string) {
@@ -11,7 +12,7 @@
                 result = NaN;
             }
         } else if (key === "C") {
-            expr = "";
+            expr = "‎ ";
             result = null;
         } else {
             expr += key;

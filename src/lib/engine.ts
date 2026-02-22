@@ -1,9 +1,14 @@
 export function evaluate(expression: string): number {
     const allowed = '0123456789+-*/(). '
+    let cleanExpression = '';
     for (let ch of expression) {
-        if (allowed.indexOf(ch) === -1) {
-            throw new Error('Invalid character');
+        if (allowed.indexOf(ch) !== -1) {
+            cleanExpression += ch;
         }
     }
-    return eval(expression);
+    try {
+        return eval(cleanExpression);
+    } catch (e) {
+        return NaN;
+    }
 }
