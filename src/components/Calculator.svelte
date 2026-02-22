@@ -21,7 +21,10 @@
 </script>
 
 <div class="calc">
-    <div data-testid="display" class="display">{expr} {result !== null ? `= ${result}` : ""}</div>
+    <div data-testid="display" class="display">
+        {expr}
+        {result !== null ? `= ${result}` : ""}
+    </div>
     <div class="keys">
         {#each ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+", "C"] as k}
             <button on:click={() => press(k)}>{k}</button>
@@ -31,17 +34,38 @@
 
 <style lang="less">
     .calc {
-        width: min(100vw, 360px);
+        max-width: 320px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 8px;
+
         .display {
             grid-column: 1 / -1;
+            font-family: monospace;
+            padding: 8px;
+            border: 4px solid var(--accent);
+            border-radius: 4px;
+            font-size: 1.5rem;
         }
+
         .keys {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 6px;
+
+            button {
+                cursor: pointer;
+                padding: 12px;
+                font-size: 1.2rem;
+                border-radius: 4px;
+            }
+            button {
+                &:nth-child(17) {
+                    background: #ff6b6b;
+                    color: #fff;
+                    font-weight: 600;
+                }
+            }
         }
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: 8px;
     }
 </style>
