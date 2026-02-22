@@ -1,14 +1,26 @@
 <script lang="ts">
+    import { evaluate } from "../lib/engine";
     let expr = "";
     let result: number | null = null;
 
     function press(key: string) {
-        // TODO
+        if (key === "=") {
+            try {
+                result = evaluate(expr);
+            } catch (e) {
+                result = NaN;
+            }
+        } else if (key === "C") {
+            expr = "";
+            result = null;
+        } else {
+            expr += key;
+        }
     }
 </script>
 
 <div class="calc">
-    <div class="display">{expr} {result !== null ? `= ${result}` : ""}</div>
+    <div data-testid="display" class="display">{expr} {result !== null ? `= ${result}` : ""}</div>
     <div class="keys">
         {#each ["7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+", "C"] as k}
             <button on:click={() => press(k)}>{k}</button>
@@ -18,6 +30,7 @@
 
 <style lang="less">
     .calc {
+        width: min(100vw, 360px);
         .display {
             grid-column: 1 / -1;
         }
